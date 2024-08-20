@@ -10,7 +10,7 @@ const HomePage = () => {
   const handleFormSubmit = async ({ year, month, year1, month1 }) => {
     try {
       // Make the API call with form data
-      const response = await axios.post('https://a1f0-116-90-119-33.ngrok-free.app/generate-report', {
+      const response = await axios.post('https://d063-39-46-213-12.ngrok-free.app/generate-report', {
         year:year,
         month:month,
         year1:year1,
@@ -26,21 +26,6 @@ const HomePage = () => {
       console.error('Error fetching data:', error);
     }
   };
-
-  // const handleFormSubmit = ({ year, month, year1, month1 }) => {
-  //   // Create dummy data with 49 fields
-  //   const dummyData = Array.from({ length: 20 }, () => {
-  //     const obj = {};
-  //     for (let i = 1; i <= 49; i++) {
-  //       obj[`field${i}`] = `Data ${i}`;
-  //     }
-  //     return obj;
-  //   });
-
-  //   setData(dummyData);
-  //   setFormSubmitted(true);
-  // };
-
 
   const handleToggle = () => {
     setFormSubmitted(prevState => !prevState);
