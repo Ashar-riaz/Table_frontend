@@ -1,47 +1,36 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import * as XLSX from 'xlsx';
 
 const ExcelUploader = ({ onFileUpload }) => {
-  const [fileData, setFileData] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
-    const reader = new FileReader();
 
-    reader.onload = (e) => {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-      
-      setFileData(jsonData);
-      onFileUpload(jsonData);
-    };
-
-    reader.readAsArrayBuffer(file);
+    setUploadedFile(file);
+    onFileUpload(file);
   };
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: '.xlsx, .xls' });
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: '.xlsx',
+  });
 
   return (
     <div className="flex flex-col items-center p-4 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg">
       <div
         {...getRootProps({
           className:
-            'w-full text-center text-gray-400 cursor-pointer hover:text-gray-800 h-96',
+            'w-full text-center text-gray-400 cursor-pointer hover:text-gray-800 h-56',
         })}
       >
         <input {...getInputProps()} className="hidden" />
         <p className="text-lg">Drag & drop an Excel file here, or click to select one</p>
       </div>
-      {fileData && (
+      {uploadedFile && (
         <div className="mt-4 w-full overflow-x-auto">
-          <h3 className="text-lg font-semibold text-gray-700">File Data:</h3>
-          <pre className="p-2 bg-white border rounded-md max-h-64 overflow-y-auto">
-            {JSON.stringify(fileData, null, 2)}
-          </pre>
+          <h3 className="text-lg font-semibold text-gray-700">Uploaded File:</h3>
+          <p className="p-2 bg-white border rounded-md">{uploadedFile.name}</p>
         </div>
       )}
     </div>
