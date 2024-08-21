@@ -3,7 +3,7 @@ import React from 'react';
 const DataTable = ({ data }) => {
   return (
     <div className="overflow-x-auto">
-      <div className="max-h-96 overflow-y-auto">
+      <div className="max-h-[900px] h-[456px] overflow-y-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-200">
             <tr>

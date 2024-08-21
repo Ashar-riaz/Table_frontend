@@ -10,7 +10,7 @@ const HomePage = () => {
   const handleFormSubmit = async ({ year, month, year1, month1 }) => {
     try {
       // Make the API call with form data
-      const response = await axios.post('https://d063-39-46-213-12.ngrok-free.app/generate-report', {
+      const response = await axios.post('https://a56b-39-49-172-40.ngrok-free.app/generate-report', {
         year:year,
         month:month,
         year1:year1,
